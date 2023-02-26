@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Arial,Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.inputText {
+  background-color: #ffff;
+  margin: 10px;
+  height: 200px;
+  font-size: 15px;
+}
+.inputText mat-label{
+  font-size: 15px;
+}
+.btn-lg {
+  background-color: #fa4616;
+  color: white;
+  margin-left: 10px;
+  width: 200px;
+  margin-bottom: 50px;
+}

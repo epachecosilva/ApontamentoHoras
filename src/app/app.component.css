@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.ml-2 {
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 3vw;
+  color: #fa4616;
+  text-align: center;
+}
+
+.mr-2 {
+  height: 190px;
+  }
+
+.subtitle {
+  color: #000000;
+  font-size: 120%;
+  margin-left: 190px;
+  margin-top: -40px;
+
+}
+
+.card {
+  margin: 20px;
+  margin-top: 40px;
+  border: 0px solid#fa4616;
+  border-radius: 5px;
+}
+
+.headerlb {
+  color: #fa4616;
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.inputprofi {
+  margin: 10px;
+  margin-bottom: -20px;
+  width: 90%;
+  color: #fa4616 !important;
+}
+
+.inputdata {
+  margin: 10px;
+  margin-bottom: -20px;
+  width: 80%;
+}
+
+.inputDem {
+  margin: 10px;
+  width: 80%;
+}
+.inputPerc{
+  margin: 10px;
+  width: 39%;
+}
+.inputHor{
+  margin: 10px;
+  width: 60%;
+}
+.mat-mdc-radio-button {
+  margin: 30px;
+  margin-left: 10px;
+  font-size: 40px;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff;
+}
+
