@@ -17,12 +17,15 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/m
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import {MatRadioModule} from '@angular/material/radio';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './component/home/home.component';
 
 registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ registerLocaleData(ptBr);
     CommonModule,
     FormsModule,
     MatMomentDateModule,
-    MatRadioModule
+    MatRadioModule,
+    AppRoutingModule
   ],
   providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],
   bootstrap: [AppComponent]

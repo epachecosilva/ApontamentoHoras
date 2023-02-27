@@ -13,15 +13,9 @@ interface Food {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'form-angular';
-  selectedDate: Date = new Date();
-  datePipe: any;
-  onDateChange(event: any) {
-    console.log(event);
-    console.log(this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy'));
-  }
+  title = 'Apontamento de Horas';
+
 }
-export class RadioOverviewExample {}
-export class FormFieldOverviewExample {}
+
 
 
