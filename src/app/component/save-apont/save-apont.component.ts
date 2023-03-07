@@ -2,18 +2,11 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-save-apont',
+  templateUrl: './save-apont.component.html',
+  styleUrls: ['./save-apont.component.css']
 })
-
-export class HomeComponent {
-  router: any;
-
-onClick() {
-  this.router.navigate(['/saveApont']);
-throw new Error('Method not implemented.');
-}
+export class SaveApontComponent {
   title = 'form-angular';
   selectedDate: Date = new Date();
   datePipe: any;

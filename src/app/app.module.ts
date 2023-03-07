@@ -19,13 +19,16 @@ import ptBr from '@angular/common/locales/pt';
 import {MatRadioModule} from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './component/home/home.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { SaveApontComponent } from './component/save-apont/save-apont.component';
 
 registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SaveApontComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ registerLocaleData(ptBr);
     FormsModule,
     MatMomentDateModule,
     MatRadioModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSlideToggleModule
   ],
   providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],
   bootstrap: [AppComponent]

@@ -57,20 +57,9 @@
   position: absolute;
   width: 215px;
   height: 40px;
-  left: 1025px;
-  top: 258px;
-  background: #1f1546;
-  border-radius: 5px;
-}
-
-.btn_meus_apt {
-  position: absolute;
-  width: 215px;
-  height: 40px;
   margin-left: 1260px;
   top: 258px;
-  background: #f94615;
-  border: 2px solid #f94615;
+  background: #1f1546;
   border-radius: 5px;
 }
 .forms{
