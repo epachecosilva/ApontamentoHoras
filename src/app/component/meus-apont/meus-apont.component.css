@@ -23,6 +23,8 @@
 }
 .btn_meus_apt {
   position: absolute;
+  width: 215px;
+  height: 40px;
   background: #f94615;
   border: 2px solid #f94615;
   border-radius: 5px;
@@ -52,6 +54,7 @@
   background-color: #ffffff;
 }
 .rodape {
+  margin-top: 10px;
   background-color: #1f1546;
   color: #ffffff;
   height: 40px;
