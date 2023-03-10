@@ -8,12 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class SaveApontComponent {
   title = 'form-angular';
-  selectedDate: Date = new Date();
-  datePipe: any;
-  onDateChange(event: any) {
-    console.log(event);
-    console.log(this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy'));
-  }
+  date: Date = new Date();
   isChecked = false;
   formGroup = this._formBuilder.group({
     enableWifi: '',

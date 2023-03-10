@@ -31,50 +31,42 @@
   margin: 0;
   font-size: 14px;
 }
-
-.button_nav {
-  display: flex;
-  justify-content: first baseline;
-  color: #fa4116;
+::ng-deep .mat-mdc-card {
+  margin-left: 20px;
+  margin-right: 20px;
 }
-
-.button_nav label {
-  position: absolute;
+.title {
   width: 300px;
   height: 32px;
-  left: 20px;
-  top: 268.83px;
+  margin-top: 30px;
+  margin-left: 5px;
   font-style: normal;
   font-weight: 400;
   font-size: 19px;
   line-height: 32px;
-
   color: #F94615;
-
 }
 
 .btn_concluir {
-  position: absolute;
+  margin-right: 20px;
   width: 215px;
   height: 40px;
-  left: 1025px;
-  top: 258px;
   background: #1f1546;
   border-radius: 5px;
 }
-
 .btn_meus_apt {
-  position: absolute;
   width: 215px;
   height: 40px;
-  margin-left: 1260px;
-  top: 258px;
   background: #f94615;
   border: 2px solid #f94615;
   border-radius: 5px;
 }
+
+.cardAction{
+  margin-top: -30px;
+}
 .forms{
-  margin-top: 120px;
+  margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -156,4 +148,9 @@
   height: 40px;
   font-weight: 50;
   font-size: 15px;
+}
+
+.dateCalendar{
+  margin-top: 10px;
+  margin-left: 15px;
 }

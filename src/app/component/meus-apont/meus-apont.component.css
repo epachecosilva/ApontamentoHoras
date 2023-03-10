@@ -1,0 +1,60 @@
+.mat-toolbar {
+  height: 100px;
+  border-bottom: 3px solid #fa4116;
+}
+.mr-2 {
+  height: 40px;
+}
+::ng-deep .mat-mdc-card {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.title {
+  width: 300px;
+  height: 32px;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 32px;
+  color: #F94615;
+}
+.btn_meus_apt {
+  position: absolute;
+  background: #f94615;
+  border: 2px solid #f94615;
+  border-radius: 5px;
+}
+.mat-mdc-button:not(:disabled) {
+  color: #ffffff;
+}
+.cardAction{
+  margin-top: -30px;
+}
+
+.dateCalendar{
+  margin-top: 10px;
+  margin-left: 15px;
+}
+.headerlb{
+  color: #000000;
+  font-size: 15px;
+  margin-top: 5px;
+}
+.inputDem {
+  margin: 10px;
+  width: 90%;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff;
+}
+.rodape {
+  background-color: #1f1546;
+  color: #ffffff;
+  height: 40px;
+  font-weight: 50;
+  font-size: 15px;
+}

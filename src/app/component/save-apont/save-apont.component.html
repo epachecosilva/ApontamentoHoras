@@ -12,10 +12,14 @@
       trabalho.
     </h3>
   </div>
-  <div class="button_nav">
-    <label>Registrar apontamento</label>
-    <button mat-button class="btn_concluir">Salvar apontamento</button>
-  </div>
+  <mat-card>
+    <mat-card-header class="title" align="end">
+      <header>Revisar Apontamento</header>
+    </mat-card-header>
+    <mat-card-actions class="cardAction" align="end">
+    <button mat-button class="btn_concluir" routerLink="/saveApont">Salvar apontamento</button>
+    </mat-card-actions>
+  </mat-card>
   <mat-card class="forms">
     <div class="row">
       <div class="col-md-3">
@@ -50,20 +54,9 @@
         <mat-card-header>
           <mat-card-title class="headerlb">Data Atual</mat-card-title>
         </mat-card-header>
-        <mat-form-field class="inputdata">
-          <mat-label>Dia trabalhado</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            [ngModel]="selectedDate | date : 'dd/MM/yyyy'"
-            (ngModelChange)="onDateChange($event)"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <div class="dateCalendar">
+          <p-calendar [(ngModel)]="date" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" [disabledDays]="[0,6]"></p-calendar>
+        </div>
       </div>
       <div class="col-md-3">
         <mat-card-header>

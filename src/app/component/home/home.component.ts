@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 export class HomeComponent {
   router: any;
-
+  date: Date = new Date();
 onClick() {
   this.router.navigate(['/saveApont']);
 throw new Error('Method not implemented.');

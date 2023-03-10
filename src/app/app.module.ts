@@ -21,6 +21,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './component/home/home.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { SaveApontComponent } from './component/save-apont/save-apont.component';
+import { MeusApontComponent } from './component/meus-apont/meus-apont.component';
+import {CalendarModule} from 'primeng/calendar';
+import { EditorModule } from 'primeng/editor';
+import { TableModule } from 'primeng/table'; // importa o módulo TableModule
 
 registerLocaleData(ptBr);
 
@@ -28,7 +32,8 @@ registerLocaleData(ptBr);
   declarations: [
     AppComponent,
     HomeComponent,
-    SaveApontComponent
+    SaveApontComponent,
+    MeusApontComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,10 @@ registerLocaleData(ptBr);
     MatMomentDateModule,
     MatRadioModule,
     AppRoutingModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CalendarModule,
+    EditorModule,
+    TableModule
   ],
   providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],
   bootstrap: [AppComponent]
