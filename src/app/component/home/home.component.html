@@ -1,9 +1,9 @@
 <body>
   <mat-toolbar>
-    <img src="assets/img/spassu.png" class="mr-2" alt="Imagem"/>
+    <img src="assets/img/spassu.png" class="mr-2" alt="Imagem" />
   </mat-toolbar>
   <div class="subtitle">
-    <h1 style="color: #fa4116;">ONS - Apontamento de horas</h1>
+    <h1 style="color: #fa4116">ONS - Apontamento de horas</h1>
     <h3>
       O objetivo do formulário é registrar as demandas diárias realizadas por
       você. Utilizar um formulário para cada tipo de demanda, uma vez que só
@@ -17,8 +17,12 @@
       <header>Registrar Apontamentos</header>
     </mat-card-header>
     <mat-card-actions class="cardAction" align="end">
-    <button mat-button class="btn_concluir" routerLink="/saveApont">Concluir apontamento</button>
-    <button mat-button class="btn_meus_apt" routerLink="/meusApont">Meus apontamentos</button>
+      <button mat-button class="btn_concluir" routerLink="/saveApont">
+        Concluir apontamento
+      </button>
+      <button mat-button class="btn_meus_apt" routerLink="/meusApont">
+        Meus apontamentos
+      </button>
     </mat-card-actions>
   </mat-card>
   <mat-card class="forms">
@@ -29,13 +33,15 @@
         </mat-card-header>
         <mat-form-field class="inputprofi">
           <mat-label>Selecione o profissional</mat-label>
-          <mat-select>
-            <mat-option value="p1">Alexandre Rocha Kovacs</mat-option>
-            <mat-option value="p2">Eduardo Pacheco da Silva</mat-option>
-            <mat-option value="p3">Rodrigo Gonçalvez de Souza</mat-option>
-            <mat-option value="p4">Ana Paula Oliveira Santos</mat-option>
-            <mat-option value="p5">Marcelo Souza Lima</mat-option>
-            <mat-option value="p6">Camila Garcia Almeida</mat-option>
+          <mat-select
+            [(ngModel)]="selectedProfissional"
+          >
+            <mat-option
+              *ngFor="let profissional of profissionaisUnicos"
+              [value]="profissional"
+            >
+              {{ profissional }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -45,25 +51,37 @@
         </mat-card-header>
         <mat-form-field class="inputSist">
           <mat-label>Sistema em que atuou na demanda.</mat-label>
-          <mat-select>
-            <mat-option value="s2">Time 7 - SSIS/ETL</mat-option>
-            <mat-option value="s3">Time 8 - Integração</mat-option>
+          <mat-select
+            [(ngModel)]="selectedSistema"
+            [disabled]="!selectedProfissional"
+          >
+            <mat-option
+              *ngFor="let sistema of sistemasFiltrados"
+              [value]="sistema"
+            >
+              {{ sistema }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
+
       <div class="col-md-3">
         <mat-card-header>
           <mat-card-title class="headerlb">Data Atual</mat-card-title>
         </mat-card-header>
         <div class="dateCalendar">
-          <p-calendar [(ngModel)]="date" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" [disabledDays]="[0,6]"></p-calendar>
+          <p-calendar
+            [(ngModel)]="date"
+            [showIcon]="true"
+            inputId="icon"
+            dateFormat="dd/mm/yy"
+            [disabledDays]="[0, 6]"
+          ></p-calendar>
         </div>
       </div>
       <div class="col-md-3">
         <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Selecione a Demanda</mat-card-title
-          >
+          <mat-card-title class="headerlb">Selecione a Demanda</mat-card-title>
         </mat-card-header>
         <mat-form-field class="inputDem">
           <mat-label>ID da demanda TFS do ONS.</mat-label>
@@ -76,11 +94,15 @@
         <mat-card-header>
           <mat-card-title class="headerlb">Demanda Emergencial</mat-card-title>
         </mat-card-header>
-        <mat-slide-toggle class="slide" [(ngModel)]="isChecked"> Não / Sim</mat-slide-toggle>
+        <mat-slide-toggle class="slide" [(ngModel)]="isChecked">
+          Não / Sim</mat-slide-toggle
+        >
       </div>
       <div class="col-md-2">
         <mat-card-header>
-          <mat-card-title class="headerlb">Etapa de Desenvolvimento</mat-card-title>
+          <mat-card-title class="headerlb"
+            >Etapa de Desenvolvimento</mat-card-title
+          >
         </mat-card-header>
         <mat-form-field class="inputDem">
           <mat-label>Etapa em que a demanda se encontra.</mat-label>
@@ -100,7 +122,7 @@
         </mat-card-header>
         <mat-form-field class="inputHor">
           <mat-label>Apenas números.</mat-label>
-          <input matInput placeholder="Ex. 1h15min = 1.25" required>
+          <input matInput placeholder="Ex. 1h15min = 1.25" required />
         </mat-form-field>
       </div>
       <div class="col-md-2">
@@ -111,20 +133,20 @@
         </mat-card-header>
         <mat-form-field class="inputPerc">
           <mat-label>Apenas números.</mat-label>
-          <input matInput placeholder="Ex. 100" required>
+          <input matInput placeholder="Ex. 100" required />
         </mat-form-field>
       </div>
       <div class="col-md-2">
         <mat-card-header>
           <mat-card-title class="headerlb">Algum impedimento?</mat-card-title>
         </mat-card-header>
-        <mat-slide-toggle class="slide" [(ngModel)]="isImp"> Não / Sim</mat-slide-toggle>
+        <mat-slide-toggle class="slide" [(ngModel)]="isImp">
+          Não / Sim</mat-slide-toggle
+        >
       </div>
       <div class="col-md-2">
         <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Por quem?</mat-card-title
-          >
+          <mat-card-title class="headerlb">Por quem?</mat-card-title>
         </mat-card-header>
         <mat-radio-group>
           <mat-radio-button value="1">Spassu</mat-radio-button>

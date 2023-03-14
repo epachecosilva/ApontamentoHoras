@@ -25,6 +25,7 @@ import { MeusApontComponent } from './component/meus-apont/meus-apont.component'
 import {CalendarModule} from 'primeng/calendar';
 import { EditorModule } from 'primeng/editor';
 import { TableModule } from 'primeng/table'; // importa o módulo TableModule
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(ptBr);
 
@@ -55,7 +56,8 @@ registerLocaleData(ptBr);
     MatSlideToggleModule,
     CalendarModule,
     EditorModule,
-    TableModule
+    TableModule,
+    HttpClientModule
   ],
   providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],
   bootstrap: [AppComponent]
