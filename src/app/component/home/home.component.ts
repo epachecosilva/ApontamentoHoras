@@ -11,14 +11,23 @@ interface Profissional {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
+
 export class HomeComponent implements OnInit {
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private apiService: ApiServiceService // injetando o serviço de API
+  ) {
+    this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+    this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+  }
+
   router: any;
   date: Date = new Date();
   title = 'form-angular';
-  isChecked: boolean = false;
-  isChecked2: boolean = false;
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];
+  imp: string | undefined;
   impeObs: string = "Não";
   demandaEmer: string = "Não";
   profList: Profissional[] = []; // lista de profissionais
@@ -27,10 +36,6 @@ export class HomeComponent implements OnInit {
   profissionaisUnicos: string[] = []; //sistema Selecionado
   sistemasFiltrados: string[] = [];
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private apiService: ApiServiceService // injetando o serviço de API
-  ) {}
 
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
@@ -75,9 +80,9 @@ export class HomeComponent implements OnInit {
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
 
-    this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
-    this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+
   }
+
 
   selecionarProfissional() {
     const profissionalSelecionado = this.profList.find(p => p.Nome === this.selectedProfissional?.Nome);

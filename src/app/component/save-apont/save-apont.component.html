@@ -28,13 +28,13 @@
         </mat-card-header>
         <mat-form-field class="inputprofi">
           <mat-label>Selecione o profissional</mat-label>
-          <mat-select>
-            <mat-option value="p1">Alexandre Rocha Kovacs</mat-option>
-            <mat-option value="p2">Eduardo Pacheco da Silva</mat-option>
-            <mat-option value="p3">Rodrigo Gonçalvez de Souza</mat-option>
-            <mat-option value="p4">Ana Paula Oliveira Santos</mat-option>
-            <mat-option value="p5">Marcelo Souza Lima</mat-option>
-            <mat-option value="p6">Camila Garcia Almeida</mat-option>
+          <mat-select [(ngModel)]="selectedProfissional">
+            <mat-option
+              *ngFor="let profissional of profissionaisUnicos"
+              [value]="profissional"
+            >
+              {{ profissional }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -44,9 +44,16 @@
         </mat-card-header>
         <mat-form-field class="inputSist">
           <mat-label>Sistema em que atuou na demanda.</mat-label>
-          <mat-select>
-            <mat-option value="s2">Time 7 - SSIS/ETL</mat-option>
-            <mat-option value="s3">Time 8 - Integração</mat-option>
+          <mat-select
+            [(ngModel)]="selectedSistema"
+            [disabled]="!selectedProfissional"
+          >
+            <mat-option
+              *ngFor="let sistema of sistemasFiltrados"
+              [value]="sistema"
+            >
+              {{ sistema }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -75,7 +82,13 @@
         <mat-card-header>
           <mat-card-title class="headerlb">Demanda Emergencial</mat-card-title>
         </mat-card-header>
-        <mat-slide-toggle class="slide" [(ngModel)]="isChecked"> Não / Sim</mat-slide-toggle>
+        <p-selectButton class="demEmer"
+          [options]="stateOptionsDem"
+          [(ngModel)]="demandaEmer"
+          optionLabel="label"
+          optionValue="value"
+        >
+        </p-selectButton>
       </div>
       <div class="col-md-2">
         <mat-card-header>
@@ -112,7 +125,13 @@
         <mat-card-header>
           <mat-card-title class="headerlb">Algum impedimento?</mat-card-title>
         </mat-card-header>
-        <mat-slide-toggle class="slide" [(ngModel)]="isImp"> Não / Sim</mat-slide-toggle>
+        <p-selectButton class="demEmer"
+          [options]="stateOptionsImp"
+          [(ngModel)]="impeObs"
+          optionLabel="label"
+          optionValue="value"
+        >
+        </p-selectButton>
       </div>
       <div class="col-md-2">
         <mat-card-header>

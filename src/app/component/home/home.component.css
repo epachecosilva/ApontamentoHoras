@@ -183,9 +183,43 @@
 ::ng-deep .p-selectbutton .p-button:focus.p-highlight {
   background: #1f1546;
   border-color: #1f1546;
+
 }
 ::ng-deep .p-selectbutton .p-button.p-highlight:hover {
   background: #1f1546;
   border-color: #1f1546;
   color: #ffffff;
+
+}
+::ng-deep .p-button {
+  color: #ffffff;
+  border: 0 none;
+  padding: 0.3rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+  border-radius: 4px;
+}
+::ng-deep.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
+  border-color: #151414 !important;
+}
+::ng-deep.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: #000;
+  --mdc-radio-disabled-unselected-icon-color: #000;
+  --mdc-radio-unselected-focus-icon-color: #212121;
+  --mdc-radio-unselected-hover-icon-color: #212121;
+  --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-selected-focus-icon-color: #0000;
+  --mdc-radio-selected-hover-icon-color: #1f1546;
+  --mdc-radio-selected-icon-color: #1f1546;
+  --mdc-radio-selected-pressed-icon-color: #1f1546;
+  --mat-mdc-radio-ripple-color: #000;
+  --mat-mdc-radio-checked-ripple-color: #1f1546;
+}
+::ng-deep.mdc-form-field>label {
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 0px;
+  padding-right: 0;
+  order: 0;
 }
