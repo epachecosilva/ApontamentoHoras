@@ -12,20 +12,24 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule} from '@angular/forms';
-import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { FormsModule } from '@angular/forms';
+import {
+  MatMomentDateModule,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './component/home/home.component';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SaveApontComponent } from './component/save-apont/save-apont.component';
 import { MeusApontComponent } from './component/meus-apont/meus-apont.component';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
 import { EditorModule } from 'primeng/editor';
 import { TableModule } from 'primeng/table'; // importa o módulo TableModule
 import { HttpClientModule } from '@angular/common/http';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 registerLocaleData(ptBr);
 
@@ -34,7 +38,7 @@ registerLocaleData(ptBr);
     AppComponent,
     HomeComponent,
     SaveApontComponent,
-    MeusApontComponent
+    MeusApontComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +61,12 @@ registerLocaleData(ptBr);
     CalendarModule,
     EditorModule,
     TableModule,
-    HttpClientModule
+    HttpClientModule,
+    SelectButtonModule
   ],
-  providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

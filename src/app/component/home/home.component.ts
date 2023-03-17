@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
   title = 'form-angular';
   isChecked: boolean = false;
   isChecked2: boolean = false;
+  stateOptionsDem!: any[];
+  stateOptionsImp!: any[];
+  impeObs: string = "Não";
+  demandaEmer: string = "Não";
   profList: Profissional[] = []; // lista de profissionais
   selectedProfissional: Profissional | null = null; //profissional Selecionado
   selectedSistema: string | undefined;
@@ -70,6 +74,9 @@ export class HomeComponent implements OnInit {
       const sistemas = this.profList.flatMap(p => p.Sistemas).filter((item, index, self) => self.indexOf(item) === index);
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
+
+    this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+    this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
   }
 
   selecionarProfissional() {

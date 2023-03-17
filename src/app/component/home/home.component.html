@@ -33,10 +33,7 @@
         </mat-card-header>
         <mat-form-field class="inputprofi">
           <mat-label>Selecione o profissional</mat-label>
-          <mat-select
-            [(ngModel)]="selectedProfissional"
-
-          >
+          <mat-select [(ngModel)]="selectedProfissional">
             <mat-option
               *ngFor="let profissional of profissionaisUnicos"
               [value]="profissional"
@@ -95,9 +92,13 @@
         <mat-card-header>
           <mat-card-title class="headerlb">Demanda Emergencial</mat-card-title>
         </mat-card-header>
-        <mat-slide-toggle class="slide" [(ngModel)]="isChecked">
-          Não / Sim</mat-slide-toggle
+        <p-selectButton class="demEmer"
+          [options]="stateOptionsDem"
+          [(ngModel)]="demandaEmer"
+          optionLabel="label"
+          optionValue="value"
         >
+        </p-selectButton>
       </div>
       <div class="col-md-2">
         <mat-card-header>
@@ -141,9 +142,13 @@
         <mat-card-header>
           <mat-card-title class="headerlb">Algum impedimento?</mat-card-title>
         </mat-card-header>
-        <mat-slide-toggle class="slide" [(ngModel)]="isImp">
-          Não / Sim</mat-slide-toggle
+        <p-selectButton class="demEmer"
+          [options]="stateOptionsImp"
+          [(ngModel)]="impeObs"
+          optionLabel="label"
+          optionValue="value"
         >
+        </p-selectButton>
       </div>
       <div class="col-md-2">
         <mat-card-header>
