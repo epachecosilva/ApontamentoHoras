@@ -1,6 +1,6 @@
 import { ApiServiceService } from './../../service/api-service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
 
 
 interface Profissional {
@@ -39,7 +39,12 @@ export class HomeComponent implements OnInit {
   mostrarPorQuem = false;
   mostrarObservacoes = false;
 
-
+  apontamento = new FormGroup({
+    prof: new FormControl('')
+  })
+ onSubmit(){
+  console.log(this.apontamento.value);
+ }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
   }

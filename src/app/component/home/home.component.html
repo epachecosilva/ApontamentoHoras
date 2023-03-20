@@ -27,16 +27,17 @@
   </mat-card>
   <mat-card class="forms">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3" [formGroup]="apontamento" (ngSubmit)="onSubmit()" novalidate>
         <mat-card-header>
           <mat-card-title class="headerlb">Profissional</mat-card-title>
         </mat-card-header>
         <mat-form-field class="inputprofi">
           <mat-label>Selecione o profissional</mat-label>
-          <mat-select [(ngModel)]="selectedProfissional">
+          <mat-select [(ngModel)]="selectedProfissional" [ngModelOptions]="{standalone: true}">
             <mat-option
               *ngFor="let profissional of profissionaisUnicos"
               [value]="profissional"
+              formControlName="prof"
             >
               {{ profissional }}
             </mat-option>
