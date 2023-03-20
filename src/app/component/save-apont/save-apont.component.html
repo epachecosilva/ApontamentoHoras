@@ -107,18 +107,24 @@
         </mat-card-header>
         <mat-form-field class="inputHor">
           <mat-label>Apenas números.</mat-label>
-          <input matInput placeholder="Ex. 1h15min = 1.25" required>
+          <input matInput type="number"
+          min="0"
+          max="12"
+          placeholder="Ex. 1h15min = 1.25"
+          required />
         </mat-form-field>
       </div>
       <div class="col-md-2">
         <mat-card-header>
           <mat-card-title class="headerlb"
-            >Percentual de Conclusão</mat-card-title
-          >
+            >Percentual de Conclusão</mat-card-title>
         </mat-card-header>
         <mat-form-field class="inputPerc">
           <mat-label>Apenas números.</mat-label>
-          <input matInput placeholder="Ex. 100" required>
+          <input matInput type="number"
+          min="0"
+          max="100"
+          placeholder="Ex. 100">
         </mat-form-field>
       </div>
       <div class="col-md-2">
@@ -130,14 +136,13 @@
           [(ngModel)]="impeObs"
           optionLabel="label"
           optionValue="value"
+          (onChange)="onImpedimentoChange()"
         >
         </p-selectButton>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" *ngIf="mostrarPorQuem">
         <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Por quem?</mat-card-title
-          >
+          <mat-card-title class="headerlb">Por quem?</mat-card-title>
         </mat-card-header>
         <mat-radio-group>
           <mat-radio-button value="1">Spassu</mat-radio-button>
@@ -147,7 +152,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" *ngIf="mostrarObservacoes">
         <mat-card-header>
           <mat-card-title class="headerlb"
             >Observações ou explicação do impedimento?</mat-card-title

@@ -31,6 +31,9 @@ import { TableModule } from 'primeng/table'; // importa o módulo TableModule
 import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
 
+
+
+
 registerLocaleData(ptBr);
 
 @NgModule({

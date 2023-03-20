@@ -1,6 +1,7 @@
 import { ApiServiceService } from './../../service/api-service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 interface Profissional {
   Nome: string;
