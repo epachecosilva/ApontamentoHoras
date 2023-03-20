@@ -147,10 +147,11 @@
           [(ngModel)]="impeObs"
           optionLabel="label"
           optionValue="value"
+          (onChange)="onImpedimentoChange()"
         >
         </p-selectButton>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" *ngIf="mostrarPorQuem">
         <mat-card-header>
           <mat-card-title class="headerlb">Por quem?</mat-card-title>
         </mat-card-header>
@@ -162,7 +163,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" *ngIf="mostrarObservacoes">
         <mat-card-header>
           <mat-card-title class="headerlb"
             >Observações ou explicação do impedimento?</mat-card-title

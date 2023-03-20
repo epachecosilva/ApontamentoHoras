@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit {
   selectedSistema: string | undefined;
   profissionaisUnicos: string[] = []; //sistema Selecionado
   sistemasFiltrados: string[] = [];
+  mostrarPorQuem = false;
+  mostrarObservacoes = false;
 
 
   ngOnInit() {
@@ -82,11 +84,13 @@ export class HomeComponent implements OnInit {
 
 
   }
-
-
-  selecionarProfissional() {
-    const profissionalSelecionado = this.profList.find(p => p.Nome === this.selectedProfissional?.Nome);
-    this.sistemasFiltrados = profissionalSelecionado ? profissionalSelecionado.Sistemas.split(', ') : [];
-    this.selectedSistema = undefined;
+  onImpedimentoChange() {
+    if (this.impeObs === 'Sim') {
+      this.mostrarPorQuem = true;
+      this.mostrarObservacoes = true;
+    } else {
+      this.mostrarPorQuem = false;
+      this.mostrarObservacoes = false;
+    }
   }
 }
