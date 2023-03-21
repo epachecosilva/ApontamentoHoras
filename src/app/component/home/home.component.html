@@ -33,12 +33,11 @@
         </mat-card-header>
         <mat-form-field class="inputprofi">
           <mat-label>Selecione o profissional</mat-label>
-          <mat-select [(ngModel)]="selectedProfissional" [ngModelOptions]="{standalone: true}">
+          <mat-select [(ngModel)]="selectedProfissional" formControlName="prof" >
             <mat-option
               *ngFor="let profissional of profissionaisUnicos"
               [value]="profissional"
-              formControlName="prof"
-            >
+              >
               {{ profissional }}
             </mat-option>
           </mat-select>

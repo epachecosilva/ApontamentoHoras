@@ -1,5 +1,5 @@
 import { ApiServiceService } from './../../service/api-service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface Profissional {
@@ -13,6 +13,9 @@ interface Profissional {
   styleUrls: ['./save-apont.component.css']
 })
 export class SaveApontComponent implements OnInit {
+
+  @Input() prof: any;
+
   router: any;
   date: Date = new Date();
   title = 'form-angular';

@@ -1,5 +1,5 @@
 import { ApiServiceService } from './../../service/api-service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
 
 
@@ -14,6 +14,8 @@ interface Profissional {
 })
 
 export class HomeComponent implements OnInit {
+
+@Output() prof = new FormControl();
 
   constructor(
     private _formBuilder: FormBuilder,
