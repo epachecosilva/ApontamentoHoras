@@ -17,8 +17,6 @@ interface Profissional {
 
 export class HomeComponent implements OnInit {
 
-@Output() prof = new FormControl();
-
   constructor(
     private _formBuilder: FormBuilder,
     private apiService: ApiServiceService, // injetando o serviço de API

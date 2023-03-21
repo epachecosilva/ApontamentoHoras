@@ -2,7 +2,7 @@ import { TransfereService } from './../../service/transfere.service';
 import { Router } from '@angular/router';
 import { ApiServiceService } from './../../service/api-service';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Profissional {
   Nome: string;
@@ -16,14 +16,35 @@ interface Profissional {
 })
 export class SaveApontComponent implements OnInit {
 
-  @Input() prof: any;
 
-  date: Date = new Date();
+  constructor(
+    private _formBuilder: FormBuilder,
+    private apiService: ApiServiceService, // injetando o serviço de API
+    private transfereService: TransfereService,
+    private router: Router
+  ) {
+    this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+    this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+    this.apontamento = this._formBuilder.group({
+      profissional: this.profissional,
+      sistema: this.sistema,
+      date: this.date,
+      demandaEmer: this.demandaEmer,
+      etapaDev: this.etapaDev,
+      horasTrab: this.horasTrab,
+      percentual: this.percentual,
+      impeObs: this.impeObs,
+      agente: this.agente,
+      textoObs: this.textoObs
+  });
+    this.apontRev = this.apontamento;
+  }
+
+  data: Date = new Date();
   title = 'form-angular';
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];
-  impeObs: string = "Não";
-  demandaEmer: string = "Não";
+  imp: string | undefined;
   profList: Profissional[] = []; // lista de profissionais
   selectedProfissional: Profissional | null = null; //profissional Selecionado
   selectedSistema: string | undefined;
@@ -31,35 +52,55 @@ export class SaveApontComponent implements OnInit {
   sistemasFiltrados: string[] = [];
   mostrarPorQuem = false;
   mostrarObservacoes = false;
-  data = this.transfereService.getData();
+  etapaDemanda = ['Esforço de Entendimento','Esforço de Construção','Esforço de Teste','Esforço de Documentação']
 
-  formGroup = this._formBuilder.group({
-    enableWifi: '',
-    acceptTerms: ['', Validators.requiredTrue],
-  });
-  isImp = false;
-  formGroupImp = this._formBuilder.group({
-    enableWifi: '',
-    acceptTerms: ['', Validators.requiredTrue],
-  });
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private apiService: ApiServiceService, // injetando o serviço de API
-    private router: Router,
-    private transfereService: TransfereService
-  ) {
-    this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
-    this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+  isLoading: boolean = false;
+  apontamento: FormGroup;
+  apontRev: FormGroup;
+  sistema = new FormControl('', [Validators.required]);
+  profissional = new FormControl('', [Validators.required]);
+  date = new FormControl(this.data, [Validators.required]);
+  demandaEmer = new FormControl('Não', [Validators.required]);
+  etapaDev = new FormControl('', [Validators.required]);
+  horasTrab = new FormControl('', [Validators.required]);
+  percentual = new FormControl('', [Validators.required]);
+  impeObs = new FormControl('Não', [Validators.required]);
+  agente = new FormControl('spassu', [Validators.required]);
+  textoObs = new FormControl('', [Validators.required]);
+
+ onSubmit(){
+  console.log(this.apontamento.value);
+ }
+  ngOnInit() {
+    this.getProfissionais(); // chamando o método para obter a lista de profissionais
+    this.apontRev = this.transfereService.getData();
+    console.log(this.transfereService.getData().controls['profissional'].value);
+    console.log(this.apontamento.controls['profissional']);
+    this.apontamento.controls = this.transfereService.getData().controls;
+  }
+
+  onClick() {
+    this.router.navigate(['/saveApont']);
+    throw new Error('Method not implemented.');
   }
 
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
-  ngOnInit() {
-    this.getProfissionais(); // chamando o método para obter a lista de profissionais
-      console.log('Dados transferidos!',this.data);
-  }
+
+  formGroup = this._formBuilder.group({
+    enableWifi: '',
+    acceptTerms: ['', Validators.requiredTrue],
+  });
+
+  isImp = false;
+
+  formGroupImp = this._formBuilder.group({
+    enableWifi: '',
+    acceptTerms: ['', Validators.requiredTrue],
+  });
+
   getProfissionais() {
     this.apiService.getProfissionaisJSON().subscribe((response) => {
       this.profList = response;
@@ -80,9 +121,8 @@ export class SaveApontComponent implements OnInit {
 
 
   }
-
   onImpedimentoChange() {
-    if (this.impeObs === 'Sim') {
+    if (this.impeObs.value === 'Sim') {
       this.mostrarPorQuem = true;
       this.mostrarObservacoes = true;
     } else {
@@ -90,6 +130,15 @@ export class SaveApontComponent implements OnInit {
       this.mostrarObservacoes = false;
     }
   }
+
+  criar(){
+    this.isLoading = true;
+    console.log(this.apontamento);
+    this.transfereService.setData(this.apontamento);
+    this.router.navigateByUrl('/saveApont');
+    this.isLoading = false;
+  }
 }
+
 export class RadioOverviewExample {}
 export class FormFieldOverviewExample {}
