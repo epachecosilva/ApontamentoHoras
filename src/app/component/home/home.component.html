@@ -12,12 +12,13 @@
       trabalho.
     </h3>
   </div>
+<form method="post" (ngSubmit)="criar()" [formGroup]="apontamento">
   <mat-card>
     <mat-card-header class="title" align="end">
       <header>Registrar Apontamentos</header>
     </mat-card-header>
     <mat-card-actions class="cardAction" align="end">
-      <button mat-button class="btn_concluir" routerLink="/saveApont">
+      <button mat-button type="submit" class="btn_concluir">
         Concluir apontamento
       </button>
       <button mat-button class="btn_meus_apt" routerLink="/meusApont">
@@ -26,163 +27,167 @@
     </mat-card-actions>
   </mat-card>
   <mat-card class="forms">
-    <div class="row">
-      <div class="col-md-3" [formGroup]="apontamento" (ngSubmit)="onSubmit()" novalidate>
-        <mat-card-header>
-          <mat-card-title class="headerlb">Profissional</mat-card-title>
-        </mat-card-header>
-        <mat-form-field class="inputprofi">
-          <mat-label>Selecione o profissional</mat-label>
-          <mat-select [(ngModel)]="selectedProfissional" formControlName="prof" >
-            <mat-option
-              *ngFor="let profissional of profissionaisUnicos"
-              [value]="profissional"
-              >
-              {{ profissional }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-card-header>
-          <mat-card-title class="headerlb">Sistema</mat-card-title>
-        </mat-card-header>
-        <mat-form-field class="inputSist">
-          <mat-label>Sistema em que atuou na demanda.</mat-label>
-          <mat-select
-            [(ngModel)]="selectedSistema"
-            [disabled]="!selectedProfissional"
-          >
-            <mat-option
-              *ngFor="let sistema of sistemasFiltrados"
-              [value]="sistema"
+      <div class="row">
+        <div class="col-md-3">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Profissional</mat-card-title>
+          </mat-card-header>
+          <mat-form-field class="inputprofi">
+            <mat-label>Selecione o profissional</mat-label>
+            <mat-select [formControl]="profissional">
+              <mat-option
+                *ngFor="let profissional of profissionaisUnicos"
+                [value]="profissional"
+                >
+                {{ profissional }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Sistema</mat-card-title>
+          </mat-card-header>
+          <mat-form-field class="inputSist">
+            <mat-label>Sistema em que atuou na demanda.</mat-label>
+            <mat-select [formControl]="sistema"
             >
-              {{ sistema }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-3">
-        <mat-card-header>
-          <mat-card-title class="headerlb">Data Atual</mat-card-title>
-        </mat-card-header>
-        <div class="dateCalendar">
-          <p-calendar
-            [(ngModel)]="date"
-            [showIcon]="true"
-            inputId="icon"
-            dateFormat="dd/mm/yy"
-            [disabledDays]="[0, 6]"
-          ></p-calendar>
+              <mat-option
+                *ngFor="let sistema of sistemasFiltrados"
+                [value]="sistema"
+              >
+                {{ sistema }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Data Atual</mat-card-title>
+          </mat-card-header>
+          <div class="dateCalendar">
+            <p-calendar
+              [formControl]="date"
+              [showIcon]="true"
+              inputId="icon"
+              dateFormat="dd/mm/yy"
+              [disabledDays]="[0, 6]"
+            ></p-calendar>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Selecione a Demanda</mat-card-title>
+          </mat-card-header>
+          <mat-form-field class="inputDem">
+            <mat-label>ID da demanda TFS do ONS.</mat-label>
+            <mat-select></mat-select>
+          </mat-form-field>
         </div>
       </div>
-      <div class="col-md-3">
-        <mat-card-header>
-          <mat-card-title class="headerlb">Selecione a Demanda</mat-card-title>
-        </mat-card-header>
-        <mat-form-field class="inputDem">
-          <mat-label>ID da demanda TFS do ONS.</mat-label>
-          <mat-select></mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <mat-card-header>
-          <mat-card-title class="headerlb">Demanda Emergencial</mat-card-title>
-        </mat-card-header>
-        <p-selectButton class="demEmer"
-          [options]="stateOptionsDem"
-          [(ngModel)]="demandaEmer"
-          optionLabel="label"
-          optionValue="value"
-        >
-        </p-selectButton>
-      </div>
-      <div class="col-md-2">
-        <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Etapa de Desenvolvimento</mat-card-title
+
+      <div class="row">
+        <div class="col-md-2">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Demanda Emergencial</mat-card-title>
+          </mat-card-header>
+          <p-selectButton class="demEmer"
+            [options]="stateOptionsDem"
+            [formControl]="demandaEmer"
+            optionLabel="label"
+            optionValue="value"
           >
-        </mat-card-header>
-        <mat-form-field class="inputDem">
-          <mat-label>Etapa em que a demanda se encontra.</mat-label>
-          <mat-select>
-            <mat-option value="e1">Esforço de Entendimento</mat-option>
-            <mat-option value="e2">Esforço de Construção</mat-option>
-            <mat-option value="e3">Esforço de Teste</mat-option>
-            <mat-option value="e4">Esforço de Documentação</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2">
-        <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Horas produto trabalhadas</mat-card-title
+          </p-selectButton>
+        </div>
+        <div class="col-md-2">
+          <mat-card-header>
+            <mat-card-title class="headerlb"
+              >Etapa de Desenvolvimento</mat-card-title
+            >
+          </mat-card-header>
+          <mat-form-field class="inputDem">
+            <mat-label>Etapa em que a demanda se encontra.</mat-label>
+            <mat-select [formControl]="etapaDev"
+            >
+              <mat-option
+                *ngFor="let etapa of etapaDemanda"
+                [value]="etapa"
+              >
+                {{ etapa }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-card-header>
+            <mat-card-title class="headerlb"
+              >Horas produto trabalhadas</mat-card-title
+            >
+          </mat-card-header>
+          <mat-form-field class="inputHor">
+            <mat-label>Apenas números.</mat-label>
+            <input matInput type="number"
+            [formControl]="horasTrab"
+            min="0"
+            max="12"
+            placeholder="Ex. 1h15min = 1.25"
+            required />
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-card-header>
+            <mat-card-title class="headerlb"
+              >Percentual de Conclusão</mat-card-title
+            >
+          </mat-card-header>
+          <mat-form-field class="inputPerc">
+            <mat-label>Apenas números.</mat-label>
+            <input matInput type="number"
+            [formControl]="percentual"
+            min="0"
+            max="100"
+            placeholder="Ex. 100">
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Algum impedimento?</mat-card-title>
+          </mat-card-header>
+          <p-selectButton class="demEmer"
+            [options]="stateOptionsImp"
+            [formControl]="impeObs"
+            optionLabel="label"
+            optionValue="value"
+            (onChange)="onImpedimentoChange()"
           >
-        </mat-card-header>
-        <mat-form-field class="inputHor">
-          <mat-label>Apenas números.</mat-label>
-          <input matInput type="number"
-          min="0"
-          max="12"
-          placeholder="Ex. 1h15min = 1.25"
-          required />
-        </mat-form-field>
+          </p-selectButton>
+        </div>
+        <div class="col-md-2" *ngIf="mostrarPorQuem">
+          <mat-card-header>
+            <mat-card-title class="headerlb">Por quem?</mat-card-title>
+          </mat-card-header>
+          <mat-radio-group [formControl]="agente" >
+            <mat-radio-button  value="spassu">Spassu</mat-radio-button>
+            <mat-radio-button  value="ons">ONS</mat-radio-button>
+            <mat-radio-button  value="pessoal">Pessoal</mat-radio-button>
+          </mat-radio-group>
+        </div>
       </div>
-      <div class="col-md-2">
-        <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Percentual de Conclusão</mat-card-title
-          >
-        </mat-card-header>
-        <mat-form-field class="inputPerc">
-          <mat-label>Apenas números.</mat-label>
-          <input matInput type="number"
-          min="0"
-          max="100"
-          placeholder="Ex. 100">
-        </mat-form-field>
+      <div class="row">
+        <div class="col-md-12" *ngIf="mostrarObservacoes">
+          <mat-card-header>
+            <mat-card-title class="headerlb"
+              >Observações ou explicação do impedimento?</mat-card-title
+            >
+          </mat-card-header>
+          <mat-form-field class="inputText">
+            <mat-label>Insira sua resposta</mat-label>
+            <textarea matInput [formControl]="textoObs"></textarea>
+          </mat-form-field>
+        </div>
       </div>
-      <div class="col-md-2">
-        <mat-card-header>
-          <mat-card-title class="headerlb">Algum impedimento?</mat-card-title>
-        </mat-card-header>
-        <p-selectButton class="demEmer"
-          [options]="stateOptionsImp"
-          [(ngModel)]="impeObs"
-          optionLabel="label"
-          optionValue="value"
-          (onChange)="onImpedimentoChange()"
-        >
-        </p-selectButton>
-      </div>
-      <div class="col-md-2" *ngIf="mostrarPorQuem">
-        <mat-card-header>
-          <mat-card-title class="headerlb">Por quem?</mat-card-title>
-        </mat-card-header>
-        <mat-radio-group>
-          <mat-radio-button value="1">Spassu</mat-radio-button>
-          <mat-radio-button value="2">ONS</mat-radio-button>
-          <mat-radio-button value="2">Pessoal</mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12" *ngIf="mostrarObservacoes">
-        <mat-card-header>
-          <mat-card-title class="headerlb"
-            >Observações ou explicação do impedimento?</mat-card-title
-          >
-        </mat-card-header>
-        <mat-form-field class="inputText">
-          <mat-label>Insira sua resposta</mat-label>
-          <textarea matInput></textarea>
-        </mat-form-field>
-      </div>
-    </div>
   </mat-card>
+</form>
   <mat-toolbar class="rodape">
     <span>Política de privacidade</span>
   </mat-toolbar>

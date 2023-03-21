@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { TransfereService } from './../../service/transfere.service';
 import { ApiServiceService } from './../../service/api-service';
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
@@ -19,20 +21,31 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private apiService: ApiServiceService // injetando o serviço de API
+    private apiService: ApiServiceService, // injetando o serviço de API
+    private transfereService: TransfereService,
+    private router: Router
   ) {
     this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
     this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+    this.apontamento = this._formBuilder.group({
+      profissional: this.profissional,
+      sistema: this.sistema,
+      date: this.date,
+      demandaEmer: this.demandaEmer,
+      etapaDev: this.etapaDev,
+      horasTrab: this.horasTrab,
+      percentual: this.percentual,
+      impeObs: this.impeObs,
+      agente: this.agente,
+      textoObs: this.textoObs
+  });
   }
 
-  router: any;
-  date: Date = new Date();
+  data: Date = new Date();
   title = 'form-angular';
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];
   imp: string | undefined;
-  impeObs: string = "Não";
-  demandaEmer: string = "Não";
   profList: Profissional[] = []; // lista de profissionais
   selectedProfissional: Profissional | null = null; //profissional Selecionado
   selectedSistema: string | undefined;
@@ -40,10 +53,22 @@ export class HomeComponent implements OnInit {
   sistemasFiltrados: string[] = [];
   mostrarPorQuem = false;
   mostrarObservacoes = false;
+  etapaDemanda = ['Esforço de Entendimento','Esforço de Construção','Esforço de Teste','Esforço de Documentação']
 
-  apontamento = new FormGroup({
-    prof: new FormControl('')
-  })
+
+  isLoading: boolean = false;
+  apontamento: FormGroup;
+  sistema = new FormControl('', [Validators.required]);
+  profissional = new FormControl('', [Validators.required]);
+  date = new FormControl(this.data, [Validators.required]);
+  demandaEmer = new FormControl('Não', [Validators.required]);
+  etapaDev = new FormControl('', [Validators.required]);
+  horasTrab = new FormControl('', [Validators.required]);
+  percentual = new FormControl('', [Validators.required]);
+  impeObs = new FormControl('Não', [Validators.required]);
+  agente = new FormControl('spassu', [Validators.required]);
+  textoObs = new FormControl('', [Validators.required]);
+
  onSubmit(){
   console.log(this.apontamento.value);
  }
@@ -93,12 +118,20 @@ export class HomeComponent implements OnInit {
 
   }
   onImpedimentoChange() {
-    if (this.impeObs === 'Sim') {
+    if (this.impeObs.value === 'Sim') {
       this.mostrarPorQuem = true;
       this.mostrarObservacoes = true;
     } else {
       this.mostrarPorQuem = false;
       this.mostrarObservacoes = false;
     }
+  }
+
+  criar(){
+    this.isLoading = true;
+    console.log(this.apontamento);
+    this.transfereService.setData(this.apontamento);
+    this.router.navigateByUrl('/saveApont');
+    this.isLoading = false;
   }
 }

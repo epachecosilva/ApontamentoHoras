@@ -1,3 +1,5 @@
+import { TransfereService } from './../../service/transfere.service';
+import { Router } from '@angular/router';
 import { ApiServiceService } from './../../service/api-service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +18,6 @@ export class SaveApontComponent implements OnInit {
 
   @Input() prof: any;
 
-  router: any;
   date: Date = new Date();
   title = 'form-angular';
   stateOptionsDem!: any[];
@@ -30,6 +31,7 @@ export class SaveApontComponent implements OnInit {
   sistemasFiltrados: string[] = [];
   mostrarPorQuem = false;
   mostrarObservacoes = false;
+  data = this.transfereService.getData();
 
   formGroup = this._formBuilder.group({
     enableWifi: '',
@@ -43,7 +45,9 @@ export class SaveApontComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private apiService: ApiServiceService // injetando o serviço de API
+    private apiService: ApiServiceService, // injetando o serviço de API
+    private router: Router,
+    private transfereService: TransfereService
   ) {
     this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
     this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
@@ -54,6 +58,7 @@ export class SaveApontComponent implements OnInit {
   }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
+      console.log('Dados transferidos!',this.data);
   }
   getProfissionais() {
     this.apiService.getProfissionaisJSON().subscribe((response) => {
