@@ -74,6 +74,10 @@ export class SaveApontComponent implements OnInit {
     this.apontRev = this.transfereService.getData();
     this.apontamento.setValue(this.apontRev.value);
     console.log(this.apontamento.value);
+    if(this.apontamento.get('impeObs')?.value === 'nao'){
+      this.apontamento.get('agente')?.disable();
+      this.apontamento.get('textoObs')?.disable();
+    }
   }
 
   onClick() {
@@ -132,13 +136,13 @@ export class SaveApontComponent implements OnInit {
     }
   }
 
-  criar(){
-    this.isLoading = true;
-    console.log(this.apontamento);
-    this.transfereService.setData(this.apontamento);
-    this.router.navigateByUrl('/saveApont');
-    this.isLoading = false;
-  }
+  // criar(){
+  //   this.isLoading = true;
+  //   console.log(this.apontamento);
+  //   this.transfereService.setData(this.apontamento);
+  //   this.router.navigateByUrl('/saveApont');
+  //   this.isLoading = false;
+  // }
 }
 
 export class RadioOverviewExample {}
