@@ -75,9 +75,7 @@ export class SaveApontComponent implements OnInit {
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
     this.apontRev = this.transfereService.getData();
-    console.log(this.transfereService.getData().controls['profissional'].value);
-    console.log(this.apontamento.controls['profissional']);
-    this.apontamento.controls = this.transfereService.getData().controls;
+    this.apontamento.setValue(this.apontRev.value);
   }
 
   onClick() {
