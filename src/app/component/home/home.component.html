@@ -81,7 +81,14 @@
           </mat-card-header>
           <mat-form-field class="inputDem">
             <mat-label>ID da demanda TFS do ONS.</mat-label>
-            <mat-select></mat-select>
+            <mat-select [formControl] ="demanda">
+              <mat-option
+                *ngFor="let demanda of demandaList"
+                [value]="demanda"
+                >
+                {{ demanda }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </div>

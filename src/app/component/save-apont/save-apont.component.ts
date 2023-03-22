@@ -8,6 +8,10 @@ interface Profissional {
   Nome: string;
   Sistemas: string;
 }
+interface Demanda {
+  Sistema: string;
+  Demandas: string;
+}
 
 @Component({
   selector: 'app-save-apont',
@@ -29,6 +33,7 @@ export class SaveApontComponent implements OnInit {
       profissional: this.profissional,
       sistema: this.sistema,
       date: this.date,
+      demanda: this.demanda,
       demandaEmer: this.demandaEmer,
       etapaDev: this.etapaDev,
       horasTrab: this.horasTrab,
@@ -50,14 +55,17 @@ export class SaveApontComponent implements OnInit {
   profissionaisUnicos: string[] = []; //sistema Selecionado
   sistemasFiltrados: string[] = [];
   etapaDemanda = ['Esforço de Entendimento','Esforço de Construção','Esforço de Teste','Esforço de Documentação']
-
+  demList: Demanda[] = [];
+  demandaList: string[] = [];
 
   isLoading: boolean = false;
+
   apontamento: FormGroup;
   apontRev: FormGroup;
   sistema = new FormControl('', [Validators.required]);
   profissional = new FormControl('', [Validators.required]);
   date = new FormControl(this.data, [Validators.required]);
+  demanda = new FormControl('',[Validators.required]);
   demandaEmer = new FormControl('', [Validators.required]);
   etapaDev = new FormControl('', [Validators.required]);
   horasTrab = new FormControl('', [Validators.required]);
@@ -71,6 +79,7 @@ export class SaveApontComponent implements OnInit {
  }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
+    this.getDemandaJSON();
     this.apontRev = this.transfereService.getData();
     this.apontamento.setValue(this.apontRev.value);
     console.log(this.apontamento.value);
@@ -118,9 +127,32 @@ export class SaveApontComponent implements OnInit {
       const sistemas = this.profList.flatMap(p => p.Sistemas).filter((item, index, self) => self.indexOf(item) === index);
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
-
-
   }
+
+  // getDemandaJSON(){
+  //   this.apiService.getDemandaJSON().subscribe((response) => {
+  //     this.demList = response;
+  //     const demandaList = this.demList.reduce(
+  //       (Demandas: string[], demanda) => {
+  //         if (!Demandas.includes(demanda.Demandas)) {
+  //           Demandas.push(demanda.Demandas);
+  //         }
+  //         return Demandas;
+  //       },
+  //       []
+  //     );
+  //     this.demandaList = demandaList;
+  //   });
+  // }
+  getDemandaJSON(){
+    this.apiService.getDemandaJSON().subscribe((response) => {
+    this.demList = response;
+    const demandaString = this.demList.map(demanda => demanda.Demandas).join(', ');
+    const demandaList = demandaString.split(', ');
+    this.demandaList = demandaList;
+    });
+    }
+
   onChangeImp(value: string = 'nao'): void {
     if (value === 'nao') {
       this.agente.disable(); // desabilitar o FormControl agente

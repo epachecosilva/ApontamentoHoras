@@ -1,108 +1,34 @@
 [
   {
-      "Nome": "Time 1",
-      "Demandas": [
-        {
-          "Nome": "12345",
-          "Descricao": "Demanda 12345 do sistema Time 1"
-        },
-        {
-          "Nome": "67890",
-          "Descricao": "Demanda 67890 do sistema Time 1"
-        }
-      ]
+    "Sistema": "Time 1",
+    "Demandas": ["12345","14321","17890"]
   },
   {
-      "Nome": "Time 2",
-      "Demandas": [
-        {
-          "Nome": "23456",
-          "Descricao": "Demanda 23456 do sistema Time 2"
-        },
-        {
-          "Nome": "78901",
-          "Descricao": "Demanda 78901 do sistema Time 2"
-        }
-      ]
+    "Sistema": "Time 2",
+    "Demandas": ["24133","24234","28712"]
   },
   {
-      "Nome": "Time 3",
-      "Demandas": [
-        {
-          "Nome": "34567",
-          "Descricao": "Demanda 34567 do sistema Time 3"
-        },
-        {
-          "Nome": "89012",
-          "Descricao": "Demanda 89012 do sistema Time 3"
-        }
-      ]
-    },
-    {
-      "Nome": "Time 4",
-      "Demandas": [
-        {
-          "Nome": "45678",
-          "Descricao": "Demanda 45678 do sistema Time 4"
-        },
-        {
-          "Nome": "90123",
-          "Descricao": "Demanda 90123 do sistema Time 4"
-        }
-      ]
-    },
-    {
-      "Nome": "Time 5",
-      "Demandas": [
-        {
-          "Nome": "56789",
-          "Descricao": "Demanda 56789 do sistema Time 5"
-        },
-        {
-          "Nome": "01234",
-          "Descricao": "Demanda 01234 do sistema Time 5"
-        }
-      ]
-    },
-    {
-      "Nome": "Time 6",
-      "Demandas": [
-        {
-          "Nome": "67890",
-          "Descricao": "Demanda 67890 do sistema Time 6"
-        },
-        {
-          "Nome": "12345",
-          "Descricao": "Demanda 12345 do sistema Time 6"
-        }
-      ]
-    },
-    {
-      "Nome": "Time 7",
-      "Demandas": [
-        {
-          "Nome": "78901",
-          "Descricao": "Demanda 78901 do sistema Time 7"
-        },
-        {
-          "Nome": "23456",
-          "Descricao": "Demanda 23456 do sistema Time 7"
-        }
-      ]
-    },
-    {
-      "Nome": "Time 8",
-      "Demandas": [
-        {
-          "Nome": "89012",
-          "Descricao": "Demanda 89012 do sistema Time 8"
-        },
-        {
-          "Nome": "34567",
-          "Descricao": "Demanda 34567 do sistema Time 8"
-        }
-      ]
-    }
-
-}
+    "Sistema": "Time 3",
+    "Demandas": ["36321","38762","38771"]
+  },
+  {
+    "Sistema": "Time 4",
+    "Demandas": ["46321","48762","48771"]
+  },
+  {
+    "Sistema": "Time 5",
+    "Demandas": ["56321","58762","58771"]
+  },
+  {
+    "Sistema": "Time 6",
+    "Demandas": ["66321","68762","68771"]
+  },
+  {
+    "Sistema": "Time 7",
+    "Demandas": ["76321","78762","78771"]
+  },
+  {
+    "Sistema": "Time 8",
+    "Demandas": ["86321","88762","88771"]
+  }
 ]

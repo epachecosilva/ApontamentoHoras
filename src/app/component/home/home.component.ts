@@ -9,6 +9,10 @@ interface Profissional {
   Nome: string;
   Sistemas: string;
 }
+interface Demanda {
+  Sistema: string;
+  Demandas: string;
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +20,9 @@ interface Profissional {
 })
 
 export class HomeComponent implements OnInit {
+
+
+  //Construtor
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -29,6 +36,7 @@ export class HomeComponent implements OnInit {
       profissional: this.profissional,
       sistema: this.sistema,
       date: this.date,
+      demanda: this.demanda,
       demandaEmer: this.demandaEmer,
       etapaDev: this.etapaDev,
       horasTrab: this.horasTrab,
@@ -42,24 +50,29 @@ export class HomeComponent implements OnInit {
 
   };
 
+  //variáveis inicializadas
 
   data: Date = new Date();
+  jsonData: any;
   title = 'form-angular';
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];
   profList: Profissional[] = []; // lista de profissionais
   selectedProfissional: Profissional | null = null; //profissional Selecionado
-  selectedSistema: string | undefined;
-  profissionaisUnicos: string[] = []; //sistema Selecionado
+  selectedSistema: string | undefined;//sistema Selecionado
+  demandaList: string[] = [];
+  profissionaisUnicos: string[] = [];
   sistemasFiltrados: string[] = [];
   etapaDemanda = ['Esforço de Entendimento','Esforço de Construção','Esforço de Teste','Esforço de Documentação']
   porquemStatus: boolean = false;
+  demList: Demanda[] = [];
 
   isLoading: boolean = false;
-  apontamento: FormGroup;
+  apontamento: FormGroup; //cria grupo formulário
   sistema = new FormControl('', [Validators.required]);
   profissional = new FormControl('', [Validators.required]);
   date = new FormControl(this.data, [Validators.required]);
+  demanda = new FormControl('',[Validators.required]);
   demandaEmer = new FormControl('nao', [Validators.required]);
   etapaDev = new FormControl('', [Validators.required]);
   horasTrab = new FormControl('', [Validators.required]);
@@ -68,12 +81,15 @@ export class HomeComponent implements OnInit {
   agente = new FormControl('', [Validators.required]);
   textoObs = new FormControl('', [Validators.required]);
 
+
+//Métodos
+
  onSubmit(){
   console.log(this.apontamento.value);
-
  }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
+    this.getDemandaJSON();
   }
 
   onClick() {
@@ -114,9 +130,33 @@ export class HomeComponent implements OnInit {
       const sistemas = this.profList.flatMap(p => p.Sistemas).filter((item, index, self) => self.indexOf(item) === index);
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
-
-
   }
+
+  // getDemandaJSON(){
+  //   this.apiService.getDemandaJSON().subscribe((response) => {
+  //     this.demList = response;
+  //     const demandaList = this.demList.reduce(
+  //       (Demandas: string[], demanda) => {
+  //         if (!Demandas.includes(demanda.Demandas)) {
+  //           Demandas.push(demanda.Demandas);
+  //         }
+  //         return Demandas;
+  //       },
+  //       []
+  //     );
+  //     this.demandaList = demandaList;
+  //   });
+  // }
+  getDemandaJSON(){
+    this.apiService.getDemandaJSON().subscribe((response) => {
+    this.demList = response;
+    const demandaString = this.demList.map(demanda => demanda.Demandas).join(', ');
+    const demandaList = demandaString.split(', ');
+    this.demandaList = demandaList;
+    });
+    }
+
+
   onChangeImp(value: string = 'nao'): void {
     if (value === 'nao') {
       this.agente.disable(); // desabilitar o FormControl agente
@@ -131,7 +171,6 @@ export class HomeComponent implements OnInit {
       this.textoObs.enable(); // habilitar o FormControl agente
     }
   }
-
 
   criar(){
     this.isLoading = true;

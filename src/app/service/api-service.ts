@@ -20,6 +20,10 @@ export class ApiServiceService {
   getProfissionaisJSON(){
     return this.http.get<any>('assets/json/prof-list.json')
   }
+  getDemandaJSON(){
+    return this.http.get<any>('assets/json/sist-dem.json')
+  }
+
 
   setResposta(resposta: any){
     const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
