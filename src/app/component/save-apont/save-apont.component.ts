@@ -128,22 +128,6 @@ export class SaveApontComponent implements OnInit {
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
   }
-
-  // getDemandaJSON(){
-  //   this.apiService.getDemandaJSON().subscribe((response) => {
-  //     this.demList = response;
-  //     const demandaList = this.demList.reduce(
-  //       (Demandas: string[], demanda) => {
-  //         if (!Demandas.includes(demanda.Demandas)) {
-  //           Demandas.push(demanda.Demandas);
-  //         }
-  //         return Demandas;
-  //       },
-  //       []
-  //     );
-  //     this.demandaList = demandaList;
-  //   });
-  // }
   getDemandaJSON(){
     this.apiService.getDemandaJSON().subscribe((response) => {
     this.demList = response;
