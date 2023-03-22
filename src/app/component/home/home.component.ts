@@ -4,7 +4,6 @@ import { ApiServiceService } from './../../service/api-service';
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
 
-
 interface Profissional {
   Nome: string;
   Sistemas: string;
@@ -20,7 +19,6 @@ interface Demanda {
 })
 
 export class HomeComponent implements OnInit {
-
 
   //Construtor
 
@@ -68,6 +66,7 @@ export class HomeComponent implements OnInit {
   demList: Demanda[] = [];
 
   isLoading: boolean = false;
+
   apontamento: FormGroup; //cria grupo formulário
   sistema = new FormControl('', [Validators.required]);
   profissional = new FormControl('', [Validators.required]);
@@ -80,7 +79,6 @@ export class HomeComponent implements OnInit {
   impeObs = new FormControl('nao', [Validators.required]);
   agente = new FormControl('', [Validators.required]);
   textoObs = new FormControl('', [Validators.required]);
-
 
 //Métodos
 
@@ -131,6 +129,7 @@ export class HomeComponent implements OnInit {
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
   }
+
   getDemandaJSON(){
     this.apiService.getDemandaJSON().subscribe((response) => {
     this.demList = response;
@@ -138,21 +137,23 @@ export class HomeComponent implements OnInit {
     const demandaList = demandaString.split(', ');
     this.demandaList = demandaList;
     });
-    }
-
+  }
 
   onChangeImp(value: string = 'nao'): void {
     if (value === 'nao') {
       this.agente.disable(); // desabilitar o FormControl agente
+      this.agente.reset('');
     } else {
       this.agente.enable(); // habilitar o FormControl agente
     }
   }
+
   onChangeText(value: string = 'nao'): void {
     if (value === 'nao') {
-      this.textoObs.disable(); // desabilitar o FormControl agente
+      this.textoObs.disable(); // desabilitar o FormControl textoObs
+      this.textoObs.reset('');
     } else {
-      this.textoObs.enable(); // habilitar o FormControl agente
+      this.textoObs.enable(); // habilitar o FormControl textoObs
     }
   }
 

@@ -140,6 +140,7 @@ export class SaveApontComponent implements OnInit {
   onChangeImp(value: string = 'nao'): void {
     if (value === 'nao') {
       this.agente.disable(); // desabilitar o FormControl agente
+      this.agente.reset('');
     } else {
       this.agente.enable(); // habilitar o FormControl agente
     }
@@ -147,6 +148,7 @@ export class SaveApontComponent implements OnInit {
   onChangeText(value: string = 'nao'): void {
     if (value === 'nao') {
       this.textoObs.disable(); // desabilitar o FormControl agente
+      this.textoObs.reset('');
     } else {
       this.textoObs.enable(); // habilitar o FormControl agente
     }
