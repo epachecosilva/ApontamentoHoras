@@ -37,9 +37,11 @@ export class HomeComponent implements OnInit {
       agente: this.agente,
       textoObs: this.textoObs
   });
-  this.apontamento.get('agente')?.disable();
-  this.apontamento.get('textoObs')?.disable();
-  }
+    this.apontamento.get('agente')?.disable();
+    this.apontamento.get('textoObs')?.disable();
+
+  };
+
 
   data: Date = new Date();
   title = 'form-angular';
@@ -51,7 +53,7 @@ export class HomeComponent implements OnInit {
   profissionaisUnicos: string[] = []; //sistema Selecionado
   sistemasFiltrados: string[] = [];
   etapaDemanda = ['Esforço de Entendimento','Esforço de Construção','Esforço de Teste','Esforço de Documentação']
-
+  porquemStatus: boolean = false;
 
   isLoading: boolean = false;
   apontamento: FormGroup;
@@ -72,7 +74,6 @@ export class HomeComponent implements OnInit {
  }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
-    console.log(this.impeObs.value);
   }
 
   onClick() {
@@ -135,6 +136,8 @@ export class HomeComponent implements OnInit {
   criar(){
     this.isLoading = true;
     console.log(this.apontamento);
+    this.apontamento.get('agente')?.enable();
+    this.apontamento.get('textoObs')?.enable();
     this.transfereService.setData(this.apontamento);
     this.router.navigateByUrl('/saveApont');
     this.isLoading = false;
