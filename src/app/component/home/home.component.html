@@ -158,15 +158,16 @@
             [formControl]="impeObs"
             optionLabel="label"
             optionValue="value"
-            (onChange)="onImpedimentoChange()"
+            (onChange)="onChangeImp($event.value)"
+            (onChange)="onChangeText($event.value)"
           >
           </p-selectButton>
         </div>
-        <div class="col-md-2" *ngIf="mostrarPorQuem">
+        <div class="col-md-2">
           <mat-card-header>
             <mat-card-title class="headerlb">Por quem?</mat-card-title>
           </mat-card-header>
-          <mat-radio-group [formControl]="agente" >
+          <mat-radio-group [formControl]="agente">
             <mat-radio-button  value="spassu">Spassu</mat-radio-button>
             <mat-radio-button  value="ons">ONS</mat-radio-button>
             <mat-radio-button  value="pessoal">Pessoal</mat-radio-button>
@@ -174,13 +175,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12" *ngIf="mostrarObservacoes">
+        <div class="col-md-12">
           <mat-card-header>
             <mat-card-title class="headerlb"
               >Observações ou explicação do impedimento?</mat-card-title
             >
           </mat-card-header>
-          <mat-form-field class="inputText">
+          <mat-form-field class="inputText" >
             <mat-label>Insira sua resposta</mat-label>
             <textarea matInput [formControl]="textoObs"></textarea>
           </mat-form-field>

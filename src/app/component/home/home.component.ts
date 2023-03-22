@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit {
     private transfereService: TransfereService,
     private router: Router
   ) {
-    this.stateOptionsDem = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
-    this.stateOptionsImp = [{label: 'Não', value: 'Não'}, {label: 'Sim', value: 'Sim'}];
+    this.stateOptionsDem = [{label: 'Não', value: 'nao'}, {label: 'Sim', value: 'sim'}];
+    this.stateOptionsImp = [{label: 'Não', value: 'nao'}, {label: 'Sim', value: 'sim'}];
     this.apontamento = this._formBuilder.group({
       profissional: this.profissional,
       sistema: this.sistema,
@@ -37,20 +37,19 @@ export class HomeComponent implements OnInit {
       agente: this.agente,
       textoObs: this.textoObs
   });
+  this.apontamento.get('agente')?.disable();
+  this.apontamento.get('textoObs')?.disable();
   }
 
   data: Date = new Date();
   title = 'form-angular';
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];
-  imp: string | undefined;
   profList: Profissional[] = []; // lista de profissionais
   selectedProfissional: Profissional | null = null; //profissional Selecionado
   selectedSistema: string | undefined;
   profissionaisUnicos: string[] = []; //sistema Selecionado
   sistemasFiltrados: string[] = [];
-  mostrarPorQuem = false;
-  mostrarObservacoes = false;
   etapaDemanda = ['Esforço de Entendimento','Esforço de Construção','Esforço de Teste','Esforço de Documentação']
 
 
@@ -59,19 +58,21 @@ export class HomeComponent implements OnInit {
   sistema = new FormControl('', [Validators.required]);
   profissional = new FormControl('', [Validators.required]);
   date = new FormControl(this.data, [Validators.required]);
-  demandaEmer = new FormControl('Não', [Validators.required]);
+  demandaEmer = new FormControl('nao', [Validators.required]);
   etapaDev = new FormControl('', [Validators.required]);
   horasTrab = new FormControl('', [Validators.required]);
   percentual = new FormControl('', [Validators.required]);
-  impeObs = new FormControl('Não', [Validators.required]);
-  agente = new FormControl('spassu', [Validators.required]);
+  impeObs = new FormControl('nao', [Validators.required]);
+  agente = new FormControl('', [Validators.required]);
   textoObs = new FormControl('', [Validators.required]);
 
  onSubmit(){
   console.log(this.apontamento.value);
+
  }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
+    console.log(this.impeObs.value);
   }
 
   onClick() {
@@ -115,15 +116,21 @@ export class HomeComponent implements OnInit {
 
 
   }
-  onImpedimentoChange() {
-    if (this.impeObs.value === 'Sim') {
-      this.mostrarPorQuem = true;
-      this.mostrarObservacoes = true;
+  onChangeImp(value: string = 'nao'): void {
+    if (value === 'nao') {
+      this.agente.disable(); // desabilitar o FormControl agente
     } else {
-      this.mostrarPorQuem = false;
-      this.mostrarObservacoes = false;
+      this.agente.enable(); // habilitar o FormControl agente
     }
   }
+  onChangeText(value: string = 'nao'): void {
+    if (value === 'nao') {
+      this.textoObs.disable(); // desabilitar o FormControl agente
+    } else {
+      this.textoObs.enable(); // habilitar o FormControl agente
+    }
+  }
+
 
   criar(){
     this.isLoading = true;
