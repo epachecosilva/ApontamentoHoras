@@ -3,6 +3,7 @@ import { TransfereService } from './../../service/transfere.service';
 import { ApiServiceService } from './../../service/api-service';
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 interface Profissional {
   Nome: string;
@@ -86,6 +87,7 @@ export class HomeComponent implements OnInit {
   console.log(this.apontamento.value);
  }
   ngOnInit() {
+    this.apontamento.get('sistema')?.disable();
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
     this.getDemandaJSON();
   }
@@ -111,6 +113,27 @@ export class HomeComponent implements OnInit {
     acceptTerms: ['', Validators.requiredTrue],
   });
 
+  getSistemas(nome: string) {
+    this.apiService.getProfissionaisJSON().subscribe((response) => {
+      let sistemas = response.filter( function (e: any) {
+      return e.Nome == nome
+    });
+    sistemas = sistemas.reduce(
+      (sistemas: string[], profissional:any) => {
+        if (!sistemas.includes(profissional.Sistemas)) {
+          sistemas.push(profissional.Sistemas);
+
+        }
+        return sistemas;
+          },
+          []
+        );
+        this.sistemasFiltrados = sistemas;
+        if(this.sistemasFiltrados.length > 0){
+          this.apontamento.get('sistema')?.enable();
+        }
+    });
+  }
   getProfissionais() {
     this.apiService.getProfissionaisJSON().subscribe((response) => {
       this.profList = response;
@@ -124,9 +147,6 @@ export class HomeComponent implements OnInit {
         []
       );
       this.profissionaisUnicos = profissionaisUnicos;
-
-      const sistemas = this.profList.flatMap(p => p.Sistemas).filter((item, index, self) => self.indexOf(item) === index);
-      this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
   }
 
@@ -155,6 +175,10 @@ export class HomeComponent implements OnInit {
     } else {
       this.textoObs.enable(); // habilitar o FormControl textoObs
     }
+  }
+
+  selectedProf(evento: MatSelectChange){
+    this.getSistemas(evento.value);
   }
 
   criar(){
