@@ -112,7 +112,7 @@
               >Etapa de Desenvolvimento</mat-card-title
             >
           </mat-card-header>
-          <mat-form-field class="inputDem">
+          <mat-form-field class="etapaDev">
             <mat-label>Etapa em que a demanda se encontra.</mat-label>
             <mat-select [formControl]="etapaDev"
             >
@@ -133,7 +133,7 @@
           </mat-card-header>
           <mat-form-field class="inputHor">
             <mat-label>Apenas números.</mat-label>
-            <input matInput type="text"
+            <input matInput type="number"
             [formControl]="horasTrab"
             min="0"
             max="12"
@@ -150,10 +150,11 @@
           </mat-card-header>
           <mat-form-field class="inputPerc">
             <mat-label>Apenas números.</mat-label>
-            <input matInput type="text"
+            <input matInput type="number"
             [formControl]="percentual"
             min="0"
             max="100"
+            mask="999"
             placeholder="Ex. 100">
           </mat-form-field>
         </div>
