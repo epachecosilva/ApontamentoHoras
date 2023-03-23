@@ -86,8 +86,8 @@ export class HomeComponent implements OnInit {
  }
   ngOnInit() {
     this.apontamento.get('sistema')?.disable();
+    this.apontamento.get('demanda')?.disable();
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
-    this.getDemandaJSON();
   }
 
   onClick() {
@@ -148,12 +148,25 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getDemandaJSON(){
+  getDemanda(sistema: string){
     this.apiService.getDemandaJSON().subscribe((response) => {
-    this.demList = response;
-    const demandaString = this.demList.map(demanda => demanda.Demandas).join(',');
-    const demandaList = demandaString.split(',');
-    this.demandaList = demandaList;
+      let demandas = response.filter( function (e: any) {
+      return e.Sistema == sistema
+    });
+    demandas = demandas.reduce(
+      (demandas: string[], demanda:any) => {
+        if (!demandas.includes(demanda.Demandas)) {
+          demandas.push(demanda.Demandas);
+
+        }
+        return demandas;
+          },
+          []
+        );
+        this.demandaList = demandas;
+        if(this.demandaList.length > 0){
+          this.apontamento.get('demanda')?.enable();
+        }
     });
   }
 
@@ -174,9 +187,13 @@ export class HomeComponent implements OnInit {
       this.textoObs.enable(); // habilitar o FormControl textoObs
     }
   }
-
   selectedProf(evento: MatSelectChange){
     this.getSistemas(evento.value);
+    this.apontamento.get('sistema')?.reset();
+    this.apontamento.get('demanda')?.reset()
+  }
+  selectedSist(evento: MatSelectChange){
+    this.getDemanda(evento.value);
   }
 
   criar(){

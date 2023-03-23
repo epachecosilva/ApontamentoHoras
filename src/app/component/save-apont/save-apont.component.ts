@@ -80,8 +80,8 @@ export class SaveApontComponent implements OnInit {
  }
   ngOnInit() {
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
-    this.getDemandaJSON();
     this.apontRev = this.transfereService.getData();
+    this.getDemanda(this.apontRev.get('sistema')?.value);
     this.apontamento.setValue(this.apontRev.value);
     console.log(this.apontamento.value);
     if(this.apontamento.get('impeObs')?.value === 'nao'){
@@ -151,15 +151,27 @@ export class SaveApontComponent implements OnInit {
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
   }
-  getDemandaJSON(){
-    this.apiService.getDemandaJSON().subscribe((response) => {
-    this.demList = response;
-    const demandaString = this.demList.map(demanda => demanda.Demandas).join(', ');
-    const demandaList = demandaString.split(', ');
-    this.demandaList = demandaList;
-    });
-    }
+    getDemanda(sistema: string){
+      this.apiService.getDemandaJSON().subscribe((response) => {
+        let demandas = response.filter( function (e: any) {
+        return e.Sistema == sistema
+      });
+      demandas = demandas.reduce(
+        (demandas: string[], demanda:any) => {
+          if (!demandas.includes(demanda.Demandas)) {
+            demandas.push(demanda.Demandas);
 
+          }
+          return demandas;
+            },
+            []
+          );
+          this.demandaList = demandas;
+          if(this.demandaList.length > 0){
+            this.apontamento.get('demanda')?.enable();
+          }
+      });
+    }
   onChangeImp(value: string = 'nao'): void {
     if (value === 'nao') {
       this.agente.disable(); // desabilitar o FormControl agente
@@ -179,6 +191,11 @@ export class SaveApontComponent implements OnInit {
 
   selectedProf(evento: MatSelectChange){
     this.getSistemas(evento.value);
+    this.apontamento.get('sistema')?.reset();
+    this.apontamento.get('demanda')?.reset()
+  }
+  selectedSist(evento: MatSelectChange){
+    this.getDemanda(evento.value);
   }
 }
 
