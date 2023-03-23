@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiServiceService } from './../../service/api-service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 interface Profissional {
   Nome: string;
@@ -110,6 +111,28 @@ export class SaveApontComponent implements OnInit {
     acceptTerms: ['', Validators.requiredTrue],
   });
 
+  getSistemas(nome: string) {
+    this.apiService.getProfissionaisJSON().subscribe((response) => {
+      let sistemas = response.filter( function (e: any) {
+      return e.Nome == nome
+    });
+    sistemas = sistemas.reduce(
+      (sistemas: string[], profissional:any) => {
+        if (!sistemas.includes(profissional.Sistemas)) {
+          sistemas.push(profissional.Sistemas);
+
+        }
+        return sistemas;
+          },
+          []
+        );
+        this.sistemasFiltrados = sistemas;
+        if(this.sistemasFiltrados.length > 0){
+          this.apontamento.get('sistema')?.enable();
+        }
+    });
+  }
+
   getProfissionais() {
     this.apiService.getProfissionaisJSON().subscribe((response) => {
       this.profList = response;
@@ -154,13 +177,9 @@ export class SaveApontComponent implements OnInit {
     }
   }
 
-  // criar(){
-  //   this.isLoading = true;
-  //   console.log(this.apontamento);
-  //   this.transfereService.setData(this.apontamento);
-  //   this.router.navigateByUrl('/saveApont');
-  //   this.isLoading = false;
-  // }
+  selectedProf(evento: MatSelectChange){
+    this.getSistemas(evento.value);
+  }
 }
 
 export class RadioOverviewExample {}

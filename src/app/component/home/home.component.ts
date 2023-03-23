@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
   //variáveis inicializadas
 
   data: Date = new Date();
-  jsonData: any;
   title = 'form-angular';
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];

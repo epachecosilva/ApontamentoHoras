@@ -31,7 +31,7 @@
           </mat-card-header>
           <mat-form-field class="inputprofi">
             <mat-label>Selecione o profissional</mat-label>
-            <mat-select [formControl]="profissional">
+            <mat-select [formControl]="profissional" (selectionChange)="selectedProf($event)">
               <mat-option
                 *ngFor="let profissional of profissionaisUnicos"
                 [value]="profissional"
