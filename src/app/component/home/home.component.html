@@ -133,10 +133,11 @@
           </mat-card-header>
           <mat-form-field class="inputHor">
             <mat-label>Apenas números.</mat-label>
-            <input matInput type="number"
+            <input matInput type="text"
             [formControl]="horasTrab"
             min="0"
             max="12"
+            mask="99"
             placeholder="Ex. 1h15min = 1.25"
             required />
           </mat-form-field>
@@ -149,7 +150,7 @@
           </mat-card-header>
           <mat-form-field class="inputPerc">
             <mat-label>Apenas números.</mat-label>
-            <input matInput type="number"
+            <input matInput type="text"
             [formControl]="percentual"
             min="0"
             max="100"

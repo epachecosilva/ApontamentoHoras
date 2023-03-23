@@ -1,34 +1,98 @@
 [
   {
     "Sistema": "Time 1",
-    "Demandas": ["12345","14321","17890"]
+    "Demandas": "12345"
+  },
+  {
+    "Sistema": "Time 1",
+    "Demandas": "14321"
+  },
+  {
+    "Sistema": "Time 1",
+    "Demandas": "17890"
   },
   {
     "Sistema": "Time 2",
-    "Demandas": ["24133","24234","28712"]
+    "Demandas": "24133"
+  },
+  {
+    "Sistema": "Time 2",
+    "Demandas": "24234"
+  },
+  {
+    "Sistema": "Time 2",
+    "Demandas": "28712"
   },
   {
     "Sistema": "Time 3",
-    "Demandas": ["36321","38762","38771"]
+    "Demandas": "36321"
+  },
+  {
+    "Sistema": "Time 3",
+    "Demandas": "38762"
+  },
+  {
+    "Sistema": "Time 3",
+    "Demandas": "38771"
   },
   {
     "Sistema": "Time 4",
-    "Demandas": ["46321","48762","48771"]
+    "Demandas": "46321"
+  },
+  {
+    "Sistema": "Time 4",
+    "Demandas": "48762"
+  },
+  {
+    "Sistema": "Time 4",
+    "Demandas": "48771"
   },
   {
     "Sistema": "Time 5",
-    "Demandas": ["56321","58762","58771"]
+    "Demandas": "56321"
+  },
+  {
+    "Sistema": "Time 5",
+    "Demandas": "58762"
+  },
+  {
+    "Sistema": "Time 5",
+    "Demandas": "58771"
   },
   {
     "Sistema": "Time 6",
-    "Demandas": ["66321","68762","68771"]
+    "Demandas": "66321"
+  },
+  {
+    "Sistema": "Time 6",
+    "Demandas": "68762"
+  },
+  {
+    "Sistema": "Time 6",
+    "Demandas": "68771"
   },
   {
     "Sistema": "Time 7",
-    "Demandas": ["76321","78762","78771"]
+    "Demandas": "76321"
+  },
+  {
+    "Sistema": "Time 7",
+    "Demandas": "78762"
+  },
+  {
+    "Sistema": "Time 7",
+    "Demandas": "78771"
   },
   {
     "Sistema": "Time 8",
-    "Demandas": ["86321","88762","88771"]
+    "Demandas": "86321"
+  },
+  {
+    "Sistema": "Time 8",
+    "Demandas": "88762"
+  },
+  {
+    "Sistema": "Time 8",
+    "Demandas": "88771"
   }
 ]

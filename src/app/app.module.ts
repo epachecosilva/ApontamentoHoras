@@ -30,9 +30,7 @@ import { EditorModule } from 'primeng/editor';
 import { TableModule } from 'primeng/table'; // importa o módulo TableModule
 import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
-
-
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 registerLocaleData(ptBr);
 
@@ -66,7 +64,8 @@ registerLocaleData(ptBr);
     TableModule,
     HttpClientModule,
     SelectButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },

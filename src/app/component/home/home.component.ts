@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
   stateOptionsDem!: any[];
   stateOptionsImp!: any[];
   profList: Profissional[] = []; // lista de profissionais
-  selectedProfissional: Profissional | null = null; //profissional Selecionado
   selectedSistema: string | undefined;//sistema Selecionado
   demandaList: string[] = [];
   profissionaisUnicos: string[] = [];
@@ -153,8 +152,8 @@ export class HomeComponent implements OnInit {
   getDemandaJSON(){
     this.apiService.getDemandaJSON().subscribe((response) => {
     this.demList = response;
-    const demandaString = this.demList.map(demanda => demanda.Demandas).join(', ');
-    const demandaList = demandaString.split(', ');
+    const demandaString = this.demList.map(demanda => demanda.Demandas).join(',');
+    const demandaList = demandaString.split(',');
     this.demandaList = demandaList;
     });
   }
