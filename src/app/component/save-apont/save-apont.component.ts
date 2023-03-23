@@ -69,8 +69,8 @@ export class SaveApontComponent implements OnInit {
   demanda = new FormControl('',[Validators.required]);
   demandaEmer = new FormControl('', [Validators.required]);
   etapaDev = new FormControl('', [Validators.required]);
-  horasTrab = new FormControl('', [Validators.required]);
-  percentual = new FormControl('', [Validators.required]);
+  horasTrab = new FormControl('', [Validators.required,Validators.maxLength(5),Validators.min(1),Validators.max(12)]);
+  percentual =  new FormControl('', [Validators.required,Validators.maxLength(3),Validators.max(100)]);
   impeObs = new FormControl('', [Validators.required]);
   agente = new FormControl('', [Validators.required]);
   textoObs = new FormControl('', [Validators.required]);
@@ -196,6 +196,13 @@ export class SaveApontComponent implements OnInit {
   }
   selectedSist(evento: MatSelectChange){
     this.getDemanda(evento.value);
+  }
+
+  salvar(){
+    if(this.apontamento.invalid){
+      return;
+    }
+    this.router.navigateByUrl('/');
   }
 }
 

@@ -12,13 +12,13 @@
       trabalho.
     </h3>
   </div>
-<form method="post" [formGroup]="apontamento">
+<form method="post" (ngSubmit)="salvar()" [formGroup]="apontamento" #formDir="ngForm">
   <mat-card>
     <mat-card-header class="title" align="end">
       <header>Registrar Apontamentos</header>
     </mat-card-header>
     <mat-card-actions class="cardAction" align="end">
-      <button mat-button type="submit" routerLink="/" class="btn_concluir">
+      <button mat-button type="submit" class="btn_concluir">
         Salvar apontamento
       </button>
     </mat-card-actions>
@@ -130,10 +130,8 @@
           </mat-card-header>
           <mat-form-field class="inputHor">
             <mat-label>Apenas números.</mat-label>
-            <input matInput type="number"
+            <input matInput type="text"
             [formControl]="horasTrab"
-            min="0"
-            max="12"
             placeholder="Ex. 1h15min = 1.25"
             required />
           </mat-form-field>
@@ -146,10 +144,8 @@
           </mat-card-header>
           <mat-form-field class="inputPerc">
             <mat-label>Apenas números.</mat-label>
-            <input matInput type="number"
+            <input matInput type="text"
             [formControl]="percentual"
-            min="0"
-            max="100"
             placeholder="Ex. 100">
           </mat-form-field>
         </div>

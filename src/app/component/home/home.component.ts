@@ -73,8 +73,10 @@ export class HomeComponent implements OnInit {
   demanda = new FormControl('',[Validators.required]);
   demandaEmer = new FormControl('nao', [Validators.required]);
   etapaDev = new FormControl('', [Validators.required]);
-  horasTrab = new FormControl('', [Validators.required]);
-  percentual = new FormControl('', [Validators.required]);
+  horasTrab = new FormControl('', [Validators.required,
+    Validators.maxLength(4),Validators.min(1),Validators.max(12)]);
+  percentual =  new FormControl('', [Validators.required,
+    Validators.maxLength(3),Validators.max(100)]);
   impeObs = new FormControl('nao', [Validators.required]);
   agente = new FormControl('', [Validators.required]);
   textoObs = new FormControl('', [Validators.required]);
@@ -198,6 +200,9 @@ export class HomeComponent implements OnInit {
 
   criar(){
     this.isLoading = true;
+    if(this.apontamento.invalid){
+      return;
+    }
     console.log(this.apontamento);
     this.apontamento.get('agente')?.enable();
     this.apontamento.get('textoObs')?.enable();
