@@ -6,12 +6,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSelectChange } from '@angular/material/select';
 
 interface Profissional {
-  Nome: string;
-  Sistemas: string;
+  nome: string;
+  sistemas: string;
 }
 interface Demanda {
-  Sistema: string;
-  Demandas: string;
+  sistema: string;
+  demandas: string;
 }
 
 @Component({
@@ -112,14 +112,14 @@ export class SaveApontComponent implements OnInit {
   });
 
   getSistemas(nome: string) {
-    this.apiService.getProfissionaisJSON().subscribe((response) => {
+    this.apiService.getProfissionais().subscribe((response) => {
       let sistemas = response.filter( function (e: any) {
       return e.Nome == nome
     });
     sistemas = sistemas.reduce(
       (sistemas: string[], profissional:any) => {
-        if (!sistemas.includes(profissional.Sistemas)) {
-          sistemas.push(profissional.Sistemas);
+        if (!sistemas.includes(profissional.sistemas)) {
+          sistemas.push(profissional.sistemas);
 
         }
         return sistemas;
@@ -134,12 +134,12 @@ export class SaveApontComponent implements OnInit {
   }
 
   getProfissionais() {
-    this.apiService.getProfissionaisJSON().subscribe((response) => {
+    this.apiService.getProfissionais().subscribe((response) => {
       this.profList = response;
       const profissionaisUnicos = this.profList.reduce(
         (nomes: string[], profissional) => {
-          if (!nomes.includes(profissional.Nome)) {
-            nomes.push(profissional.Nome);
+          if (!nomes.includes(profissional.nome)) {
+            nomes.push(profissional.nome);
           }
           return nomes;
         },
@@ -147,31 +147,31 @@ export class SaveApontComponent implements OnInit {
       );
       this.profissionaisUnicos = profissionaisUnicos;
 
-      const sistemas = this.profList.flatMap(p => p.Sistemas).filter((item, index, self) => self.indexOf(item) === index);
+      const sistemas = this.profList.flatMap(p => p.sistemas).filter((item, index, self) => self.indexOf(item) === index);
       this.sistemasFiltrados = Array.from(new Set(sistemas));
     });
   }
-    getDemanda(sistema: string){
-      this.apiService.getDemandaJSON().subscribe((response) => {
-        let demandas = response.filter( function (e: any) {
-        return e.Sistema == sistema
+  getDemanda(sistema: string){
+    this.apiService.getSistemas().subscribe((response) => {
+      let demandas = response.filter(function (e: any) {
+        return e.sistema == sistema
       });
       demandas = demandas.reduce(
         (demandas: string[], demanda:any) => {
-          if (!demandas.includes(demanda.Demandas)) {
-            demandas.push(demanda.Demandas);
+          if (!demandas.includes(demanda.demandas)) {
+            demandas.push(demanda.demandas);
 
           }
           return demandas;
-            },
-            []
-          );
-          this.demandaList = demandas;
-          if(this.demandaList.length > 0){
-            this.apontamento.get('demanda')?.enable();
-          }
-      });
-    }
+        },
+        []
+      );
+      this.demandaList = demandas.join(',').split(',');
+      if(this.demandaList.length > 0){
+        this.apontamento.get('demanda')?.enable();
+      }
+    });
+  }
   onChangeImp(value: string = 'nao'): void {
     if (value === 'nao') {
       this.agente.disable(); // desabilitar o FormControl agente

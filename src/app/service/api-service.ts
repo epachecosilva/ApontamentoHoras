@@ -10,11 +10,13 @@ export class ApiServiceService {
   constructor(private http: HttpClient) { }
 
   getProfissionais(){
-    return this.http.get(`${environment.apiUrl}/listaProfissionais`)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any>(`${environment.apiUrl}/listaProfissionais`, { headers, withCredentials: true })
   }
 
   getSistemas(){
-    return this.http.get(`${environment.apiUrl}/listaSistemas`)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<any>(`${environment.apiUrl}/listaSistemas`, { headers, withCredentials: true })
   }
 
   getProfissionaisJSON(){
