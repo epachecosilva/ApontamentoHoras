@@ -204,10 +204,8 @@ export class HomeComponent implements OnInit {
       return;
     }
     console.log(this.apontamento);
-    this.apontamento.get('agente')?.enable();
-    this.apontamento.get('textoObs')?.enable();
     this.transfereService.setData(this.apontamento);
-    this.router.navigateByUrl('/saveApont');
+    this.router.navigateByUrl('/');
     this.isLoading = false;
   }
 }

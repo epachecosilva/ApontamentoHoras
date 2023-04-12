@@ -23,8 +23,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './component/home/home.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { SaveApontComponent } from './component/save-apont/save-apont.component';
-import { MeusApontComponent } from './component/meus-apont/meus-apont.component';
 import { CalendarModule } from 'primeng/calendar';
 import { EditorModule } from 'primeng/editor';
 import { TableModule } from 'primeng/table'; // importa o módulo TableModule
@@ -37,9 +35,7 @@ registerLocaleData(ptBr);
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    SaveApontComponent,
-    MeusApontComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
