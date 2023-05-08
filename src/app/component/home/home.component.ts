@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { TransfereService } from './../../service/transfere.service';
 import { ApiServiceService } from './../../service/api-service';
 import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators ,ReactiveFormsModule, ValidatorFn} from '@angular/forms';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 interface Profissional {
@@ -13,6 +13,7 @@ interface Demanda {
   sistema: string;
   demandas: string;
 }
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,17 +33,19 @@ export class HomeComponent implements OnInit {
     this.stateOptionsDem = [{label: 'Não', value: 'nao'}, {label: 'Sim', value: 'sim'}];
     this.stateOptionsImp = [{label: 'Não', value: 'nao'}, {label: 'Sim', value: 'sim'}];
     this.apontamento = this._formBuilder.group({
+      horaDeInicio: this.horaDeInicio,
+      horaDeConclusao:this.horaDeConclusao,
+      dataDoDia: this.date,
       profissional: this.profissional,
-      sistema: this.sistema,
-      date: this.date,
-      demanda: this.demanda,
+      numeroDemanda: this.demanda,
+      qualSistema: this.sistema,
+      horasProDia: this.horasTrab,
+      percDemanda: this.percentual,
+      impedimentoObs: this.impeObs,
+      qualImpedimento: this.textoObs,
+      porQuem: this.agente,
       demandaEmer: this.demandaEmer,
-      etapaDev: this.etapaDev,
-      horasTrab: this.horasTrab,
-      percentual: this.percentual,
-      impeObs: this.impeObs,
-      agente: this.agente,
-      textoObs: this.textoObs
+      etapaDev: this.etapaDev
   });
     this.apontamento.get('agente')?.disable();
     this.apontamento.get('textoObs')?.disable();
@@ -67,28 +70,40 @@ export class HomeComponent implements OnInit {
   isLoading: boolean = false;
 
   apontamento: FormGroup; //cria grupo formulário
-  sistema = new FormControl('', [Validators.required]);
-  profissional = new FormControl('', [Validators.required]);
-  date = new FormControl(this.data, [Validators.required]);
-  demanda = new FormControl('',[Validators.required]);
-  demandaEmer = new FormControl('nao', [Validators.required]);
-  etapaDev = new FormControl('', [Validators.required]);
-  horasTrab = new FormControl('', [Validators.required,
-    Validators.maxLength(4),Validators.min(1),Validators.max(12)]);
-  percentual =  new FormControl('', [Validators.required,
-    Validators.maxLength(3),Validators.max(100)]);
-  impeObs = new FormControl('nao', [Validators.required]);
-  agente = new FormControl('', [Validators.required]);
-  textoObs = new FormControl('', [Validators.required]);
+    horaDeInicio = new FormControl(this.data, [Validators.required]);
+    horaDeConclusao = new FormControl(this.data, [Validators.required]);
+    sistema = new FormControl('', [Validators.required]);
+    profissional = new FormControl('', [Validators.required]);
+    date = new FormControl(this.data, [Validators.required]);
+    demanda = new FormControl('',[Validators.required]);
+    demandaEmer = new FormControl('nao', [Validators.required]);
+    etapaDev = new FormControl('', [Validators.required]);
+    horasTrab = new FormControl('', [Validators.required,
+      Validators.maxLength(4),Validators.min(1),Validators.max(12)]);
+    percentual =  new FormControl('', [Validators.required,
+      Validators.maxLength(3),Validators.max(100)]);
+    impeObs = new FormControl('nao', [Validators.required]);
+    agente = new FormControl('', [Validators.required]);
+    textoObs = new FormControl('', [Validators.required]);
+
+
+//Objeto de retorno para o método POST
+
+resposta: any;
+
+
 
 //Métodos
 
  onSubmit(){
   console.log(this.apontamento.value);
  }
+
   ngOnInit() {
     this.apontamento.get('sistema')?.disable();
     this.apontamento.get('demanda')?.disable();
+    this.apontamento.get('porQuem')?.disable();
+    this.apontamento.get('qualImpedimento')?.disable();
     this.getProfissionais(); // chamando o método para obter a lista de profissionais
   }
 
@@ -181,6 +196,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  adicionarApontamento() {
+    location.reload();
+  }
+
   onChangeText(value: string = 'nao'): void {
     if (value === 'nao') {
       this.textoObs.disable(); // desabilitar o FormControl textoObs
@@ -200,14 +219,14 @@ export class HomeComponent implements OnInit {
 
   criar(){
     this.isLoading = true;
+    this.apiService.postApontamento(this.apontamento.value).subscribe((response) => {
+      this.resposta = response;
+    });
     if(this.apontamento.invalid){
       return;
     }
-    console.log(this.apontamento);
-    this.apontamento.get('agente')?.enable();
-    this.apontamento.get('textoObs')?.enable();
-    this.transfereService.setData(this.apontamento);
-    this.router.navigateByUrl('/saveApont');
+    location.reload();
+    this.router.navigateByUrl('/');
     this.isLoading = false;
   }
 }
