@@ -225,6 +225,7 @@ resposta: any;
     if(this.apontamento.invalid){
       return;
     }
+    location.reload();
     this.router.navigateByUrl('/');
     this.isLoading = false;
   }
